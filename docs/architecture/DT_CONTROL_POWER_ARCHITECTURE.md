@@ -1,10 +1,10 @@
 # DT Control Power — Plano maestro de arquitectura y ejecución para orquestador
 
-> **Estado:** especificación de implementación para demo/POC.  
-> **Versión del plano:** 1.0 · **Fecha:** 2026-11-10  
-> **Repositorio:** `https://github.com/jaromeDeveloper/dt-control-power`  
-> **Desarrollo:** Windows, `D:\Repositorios\dt-control-power`  
-> **Ejecución:** Ubuntu Server 26.04.1 LTS en VirtualBox, `dt-controltower-01`  
+> **Estado:** especificación de implementación para demo/POC.
+> **Versión del plano:** 1.0 · **Fecha:** 2026-11-10
+> **Repositorio:** `https://github.com/jaromeDeveloper/dt-control-power`
+> **Desarrollo:** Windows, `D:\Repositorios\dt-control-power`
+> **Ejecución:** Ubuntu Server 26.04.1 LTS en VirtualBox, `dt-controltower-01`
 > **Regla principal:** funcionalidad visible de extremo a extremo con coste de ejecución y tokens controlados; **sin runners, GitHub Actions ni CI/CD automático**.
 
 ---

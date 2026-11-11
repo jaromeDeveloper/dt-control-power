@@ -26,5 +26,4 @@ CREATE INDEX ix_process_events_process_occurred
 CREATE INDEX ix_process_events_process_area_occurred
     ON process_events (process_id, area_code, occurred_at, id);
 CREATE UNIQUE INDEX uk_process_events_process_idempotency
-    ON process_events (process_id, idempotency_key)
-    WHERE idempotency_key IS NOT NULL;
+    ON process_events (process_id, idempotency_key);

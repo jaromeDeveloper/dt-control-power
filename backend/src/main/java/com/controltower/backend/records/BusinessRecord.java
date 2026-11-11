@@ -21,7 +21,7 @@ public class BusinessRecord {
 	@JoinColumn(name = "process_id", nullable = false)
 	private BusinessProcess process;
 	@Column(length = 80, nullable = false) private String reference;
-	@Column(length = 200, nullable = false) private String value;
+	@Column(name = "record_value", length = 200, nullable = false) private String value;
 	@Version private long version;
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "updated_by", nullable = false)

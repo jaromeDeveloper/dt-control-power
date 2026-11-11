@@ -35,7 +35,7 @@ public class FileStorageService {
 
 	private final Path storageRoot;
 
-	FileStorageService(@Value("${app.file-storage.path}") String storagePath) {
+	FileStorageService(@Value("${app.file-storage.path:./data/uploads}") String storagePath) {
 		this.storageRoot = Path.of(storagePath).toAbsolutePath().normalize();
 	}
 

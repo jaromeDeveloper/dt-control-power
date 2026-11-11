@@ -2,7 +2,7 @@ CREATE TABLE business_records (
     id UUID PRIMARY KEY,
     process_id UUID NOT NULL,
     reference VARCHAR(80) NOT NULL,
-    value VARCHAR(200) NOT NULL,
+    record_value VARCHAR(200) NOT NULL,
     version BIGINT NOT NULL DEFAULT 0,
     updated_by UUID NOT NULL,
     updated_at TIMESTAMP WITH TIME ZONE NOT NULL,

@@ -4,7 +4,7 @@ CREATE TABLE uploaded_files (
     stored_name VARCHAR(255) NOT NULL,
     size_bytes BIGINT NOT NULL,
     mime_type VARCHAR(120) NOT NULL,
-    sha256 CHAR(64) NOT NULL,
+    sha256 VARCHAR(64) NOT NULL,
     uploaded_by UUID NOT NULL,
     uploaded_at TIMESTAMP WITH TIME ZONE NOT NULL,
     storage_path VARCHAR(500) NOT NULL,

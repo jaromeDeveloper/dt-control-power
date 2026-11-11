@@ -5,6 +5,9 @@ target/
 # Node
 node_modules/
 dist/
+coverage/
+*.tsbuildinfo
+.eslintcache
 
 # IDE
 .idea/
@@ -17,6 +20,9 @@ dist/
 !.env.example
 *.pem
 *.key
+*.p12
+*.pfx
+*.jks
 
 # Logs
 *.log
@@ -24,6 +30,11 @@ logs/
 
 # Uploads
 uploads/
+
+# Local generated files
+.cache/
+tmp/
+*.tmp
 
 # OS
 .DS_Store

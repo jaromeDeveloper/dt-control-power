@@ -1,0 +1,47 @@
+services:
+  backend:
+    image: dt-control-power-backend:${APP_VERSION:-local}
+    build:
+      context: ../backend
+      dockerfile: Dockerfile
+    environment:
+      DB_URL: ${DB_URL:?DB_URL is required}
+      DB_USERNAME: ${DB_USERNAME:?DB_USERNAME is required}
+      DB_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD is required}
+      DEMO_ADMIN_PASSWORD: ${DEMO_ADMIN_PASSWORD:?DEMO_ADMIN_PASSWORD is required}
+      DEMO_OPERATOR_PASSWORD: ${DEMO_OPERATOR_PASSWORD:?DEMO_OPERATOR_PASSWORD is required}
+      DEMO_AUDITOR_PASSWORD: ${DEMO_AUDITOR_PASSWORD:?DEMO_AUDITOR_PASSWORD is required}
+      SESSION_COOKIE_SECURE: ${SESSION_COOKIE_SECURE:-false}
+      FILE_STORAGE_PATH: /var/lib/dt-control-power/uploads
+      JAVA_TOOL_OPTIONS: ${JAVA_TOOL_OPTIONS:--Xms128m -Xmx768m -XX:MaxMetaspaceSize=256m}
+      LOGGING_STRUCTURED_FORMAT_CONSOLE: ${LOGGING_STRUCTURED_FORMAT_CONSOLE:-logstash}
+    ports:
+      - "127.0.0.1:8080:8080"
+    networks:
+      - process-observability
+    volumes:
+      - type: bind
+        source: ${UPLOADS_HOST_PATH:?UPLOADS_HOST_PATH is required}
+        target: /var/lib/dt-control-power/uploads
+    read_only: true
+    tmpfs:
+      - /tmp:size=64m,mode=1777
+    mem_limit: 1250m
+    cpus: "1.5"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "--silent", "--show-error", "http://127.0.0.1:8080/api/v1/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+networks:
+  process-observability:
+    external: true
+    name: process-observability_default

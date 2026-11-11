@@ -1,0 +1,10 @@
+.git
+.gitignore
+.gitattributes
+.idea
+.vscode
+*.iml
+target
+data
+*.log
+HELP.md

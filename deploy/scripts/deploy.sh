@@ -90,7 +90,12 @@ printf 'Building immutable frontend release %s\n' "${release_id}"
 (cd "${REPO_ROOT}/frontend" && npm ci && npm run build)
 [[ -f "${REPO_ROOT}/frontend/dist/index.html" ]] || { printf 'ERROR: frontend build produced no index.html\n' >&2; exit 1; }
 
-"${SUDO[@]}" install -d -m 0755 "${RELEASES_ROOT}" "${manifest_dir}"
+# umask 077 protects deployment state, but NGINX must be able to traverse the
+# public web root. Create and normalize these parents explicitly because
+# install -d would otherwise create an omitted parent with mode 0700.
+"${SUDO[@]}" install -d -m 0755 "${WEB_ROOT}" "${RELEASES_ROOT}"
+"${SUDO[@]}" chmod 0755 "${WEB_ROOT}" "${RELEASES_ROOT}"
+"${SUDO[@]}" install -d -m 0755 "${manifest_dir}"
 [[ ! -e "${release_path}" ]] || { printf 'ERROR: release already exists: %s\n' "${release_path}" >&2; exit 1; }
 "${SUDO[@]}" install -d -m 0755 "${release_path}"
 "${SUDO[@]}" cp -a "${REPO_ROOT}/frontend/dist/." "${release_path}/"
